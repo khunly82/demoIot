@@ -1,6 +1,21 @@
-<header>Iot Dashboard</header>
+<header>
+  <div class="btn-menu" [ngClass]="{ close: !open }" (click)="clickHandler()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  IOT Dashboard
+  <div></div>
+</header>
 <div id="main-container">
-  <nav></nav>
+  <!-- @if(open) { -->
+    <nav [ngClass]="{ menuOpen: open }">
+      <ul>
+        <li><a routerLink="/home" routerLinkActive="active">Accueil</a></li>
+        <li><a routerLink="/login" routerLinkActive="active">Se Connecter</a></li>
+      </ul>
+    </nav>
+  <!-- } -->
   <main>
     <router-outlet></router-outlet>
   </main>
