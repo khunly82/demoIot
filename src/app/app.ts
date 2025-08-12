@@ -15,6 +15,7 @@ export class App {
 
   links: Links = [
     { path: '/home', title: 'Accueil' },
+    { path: '/pokedex', title: 'Pokedex' },
     // { path: '/about', title: 'A propos' },
     { path: '/login', title: 'Se Connecter' },
   ]

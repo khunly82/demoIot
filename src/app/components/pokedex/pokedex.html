@@ -1,0 +1,13 @@
+<table>
+    <tbody>
+        @for(p of pokemons?.slice(1,11); track p.pokedex_id) {
+            <tr>
+                <td>N°{{p.pokedex_id}}</td>
+                <td><img height="100" width="100" [src]="p.sprites.regular"></td>
+                <td>{{p.name.fr|uppercase}}</td>
+                <td>{{p.types?.[0]?.name}}@if(p.types?.[1]?.name){ | {{p.types?.[1]?.name}} }</td>
+                <td><a [routerLink]="['/pokemon', p.pokedex_id]" >Voir les détails</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

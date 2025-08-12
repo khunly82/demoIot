@@ -22,7 +22,9 @@ export class Home {
 
   private httpClient = inject(HttpClient);
 
-  constructor(/*private httpClient: HttpClient*/) {
+  constructor(
+    /*private httpClient: HttpClient*/
+  ) {
     // setTimeout(() => {
     //   this.ingredients = [
     //     { nom:'Sel' }, 

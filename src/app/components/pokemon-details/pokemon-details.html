@@ -1,0 +1,8 @@
+@if(pokemon) {
+    <div>
+        <h1>{{pokemon.name.fr}}</h1>
+        <p>Poids: {{pokemon.weight}}</p>
+        <p>Taille: {{pokemon.height}}</p>
+        <canvas baseChart [data]="barChartData" type="radar"> </canvas>
+    </div>
+}
