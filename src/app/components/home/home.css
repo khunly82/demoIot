@@ -6,3 +6,7 @@
 li {
     animation: anim 1s ease forwards;
 }
+
+th,td {
+    padding: 10px 20px;
+}
