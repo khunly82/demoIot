@@ -13,6 +13,12 @@ export class App {
 
   open = true;
 
+  links: Links = [
+    { path: '/home', title: 'Accueil' },
+    // { path: '/about', title: 'A propos' },
+    { path: '/login', title: 'Se Connecter' },
+  ]
+
   clickHandler() {
     this.open = !this.open;
   }

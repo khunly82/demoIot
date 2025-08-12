@@ -1,1 +1,8 @@
 <p>Page d'accueil</p>
+
+<ul>
+    <!-- <li *ngFor="let ing of ingredients; trackBy:trackFn">{{ ing.nom }}</li> -->
+     @for (ing of ingredients; track ing.nom) {
+        <li>{{ ing.nom }}</li>
+     }
+</ul>

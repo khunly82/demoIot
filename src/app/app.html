@@ -11,8 +11,9 @@
   <!-- @if(open) { -->
     <nav [ngClass]="{ menuOpen: open }">
       <ul>
-        <li><a routerLink="/home" routerLinkActive="active">Accueil</a></li>
-        <li><a routerLink="/login" routerLinkActive="active">Se Connecter</a></li>
+        @for(l of links; track l.title) {
+          <li><a [routerLink]="l.path" routerLinkActive="active">{{l.title}}</a></li>
+        }
       </ul>
     </nav>
   <!-- } -->
