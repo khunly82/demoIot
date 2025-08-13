@@ -9,15 +9,18 @@
 </header>
 <div id="main-container">
   <!-- @if(open) { -->
-    <nav [ngClass]="{ menuOpen: open }">
-      <ul>
-        @for(l of links; track l.title) {
-          <li><a [routerLink]="l.path" routerLinkActive="active">{{l.title}}</a></li>
-        }
-      </ul>
-    </nav>
+  <nav [ngClass]="{ menuOpen: open }">
+    <ul>
+      @for(l of links; track l.title) {
+      <li>
+        <a [routerLink]="l.path" routerLinkActive="active">{{ l.title }}</a>
+      </li>
+      }
+    </ul>
+  </nav>
   <!-- } -->
   <main>
+    <app-toast-emergency />
     <router-outlet></router-outlet>
   </main>
 </div>

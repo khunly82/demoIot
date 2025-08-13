@@ -13,6 +13,8 @@ export class RealtimeSensorsService {
 
   // Dernière donnée reçue
   incoming = signal<Data | null>(null);
+  emergencyInRoom = signal<String | null>(null);
+  emergencyTimeoutId: any = null;
 
   constructor() {
     this.startConnectionAsync();
@@ -45,6 +47,19 @@ export class RealtimeSensorsService {
       this.connection.on('ReceiveSensorData', (receivedData) => {
         console.log(receivedData);
         this.incoming.set(receivedData);
+      });
+
+      this.connection.on('ReceiveEmergency', (room) => {
+        console.log('IL Y A UNE URGENCE DANS LA PIECE: ', room);
+        this.emergencyInRoom.set(room);
+
+        if (this.emergencyTimeoutId) {
+          clearTimeout(this.emergencyTimeoutId);
+        }
+
+        this.emergencyTimeoutId = setTimeout(() => {
+          this.emergencyInRoom.set(null);
+        }, 5000);
       });
 
       this.connection.onclose(async () => {
