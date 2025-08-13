@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { Data } from '../../../@types/data';
 import { SensorsService } from '../../services/sensors-service';
+import { RealtimeStatus } from '../../shared/components/realtime-status/realtime-status';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule, RealtimeStatus],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })

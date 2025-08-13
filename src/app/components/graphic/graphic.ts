@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { RealtimeStatus } from '../../shared/components/realtime-status/realtime-status';
 
 @Component({
   selector: 'app-graphic',
-  imports: [],
+  imports: [RealtimeStatus],
   templateUrl: './graphic.html',
-  styleUrl: './graphic.css'
+  styleUrl: './graphic.css',
 })
-export class Graphic {
-
-}
+export class Graphic {}

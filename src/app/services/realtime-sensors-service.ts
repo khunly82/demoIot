@@ -28,6 +28,7 @@ export class RealtimeSensorsService {
     try {
       await this.connection.start();
     } catch (e) {
+      this.isConnected.set(false);
       console.log('connexion websocket échouée');
       console.warn(e);
 
@@ -39,6 +40,7 @@ export class RealtimeSensorsService {
     if (this.connection.connectionId) {
       // Nous somme connecté!
       console.log('SignalR connectionId: ' + this.connection.connectionId);
+      this.isConnected.set(true);
 
       this.connection.on('ReceiveSensorData', (receivedData) => {
         console.log(receivedData);
@@ -47,6 +49,7 @@ export class RealtimeSensorsService {
 
       this.connection.onclose(async () => {
         console.log('connexion perdue :(');
+        this.isConnected.set(false);
 
         // rappeler startConnectionAsync
         await this.connection?.stop();
