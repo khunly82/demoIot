@@ -21,11 +21,15 @@ export class RealtimeSensorsService {
       .build();
 
     // connexion au serveur
-    this.connection.start();
+    await this.connection.start();
 
     if (this.connection.connectionId) {
       // Nous somme connecté!
       console.log('SignalR connectionId: ' + this.connection.connectionId);
+
+      this.connection.on('ReceiveSensorData', (data) => {
+        console.log(data);
+      });
     }
   }
 }
