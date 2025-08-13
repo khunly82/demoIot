@@ -1,29 +1,29 @@
-<p>Page d'accueil</p>
+<p>Page d'accueil <button (click)="onBtnRefresh()">Refresh</button></p>
 
 <!-- <ul> -->
-    <!-- <li *ngFor="let ing of ingredients; trackBy:trackFn">{{ ing.nom }}</li> -->
-     <!-- @for (ing of ingredients; track ing.nom) { -->
-        <!-- <li>{{ ing.nom }}</li> -->
-     <!-- } -->
+<!-- <li *ngFor="let ing of ingredients; trackBy:trackFn">{{ ing.nom }}</li> -->
+<!-- @for (ing of ingredients; track ing.nom) { -->
+<!-- <li>{{ ing.nom }}</li> -->
+<!-- } -->
 <!-- </ul> -->
 
 <table>
-   <thead>
-      <tr>
-         <th>ID</th>
-         <th>Date</th>
-         <th>Temperature</th>
-         <th>Humidité</th>
-      </tr>
-   </thead>
-   <tbody>
-      @for(item of data; track item.id) {
-         <tr>
-            <td>{{item.id}}</td>
-            <td>{{item.date|date:'dd/MM/yyyy hh:mm'}}</td>
-            <td>{{item.temperature|number:'0.2-2'}}°C</td>
-            <td>{{item.humidity}}%</td>
-         </tr>
-      }
-   </tbody>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Temperature</th>
+      <th>Humidité</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(item of data(); track item.id) {
+    <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.date | date : "dd/MM/yyyy hh:mm" }}</td>
+      <td>{{ item.temperature | number : "0.2-2" }}°C</td>
+      <td>{{ item.humidity }}%</td>
+    </tr>
+    }
+  </tbody>
 </table>

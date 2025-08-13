@@ -1,7 +1,6 @@
-
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule } from "@angular/router";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,6 @@ import { RouterModule } from "@angular/router";
   styleUrl: './app.css',
 })
 export class App {
-
   open = true;
 
   links: Links = [
@@ -18,7 +16,8 @@ export class App {
     { path: '/pokedex', title: 'Pokedex' },
     // { path: '/about', title: 'A propos' },
     { path: '/login', title: 'Se Connecter' },
-  ]
+    { path: '/graphic', title: 'Graphics' },
+  ];
 
   clickHandler() {
     this.open = !this.open;

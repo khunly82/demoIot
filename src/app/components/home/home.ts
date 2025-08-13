@@ -2,56 +2,46 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { Data } from '../../../@types/data';
+import { SensorsService } from '../../services/sensors-service';
 
 @Component({
   selector: 'app-home',
   imports: [CommonModule],
   templateUrl: './home.html',
-  styleUrl: './home.css'
+  styleUrl: './home.css',
 })
 export class Home {
   // ingredients = [
-  //   { nom: 'Sel' }, 
-  //   { nom:'Tomates' }, 
+  //   { nom: 'Sel' },
+  //   { nom:'Tomates' },
   //   { nom:'Sucre' }
   // ];
 
   // students = ['Patrick', 'Simon', 'Ugur'];
 
-  data: Data[]|undefined;
+  private sensorsService = inject(SensorsService);
 
-  private httpClient = inject(HttpClient);
+  data = this.sensorsService.data;
 
-  constructor(
-    /*private httpClient: HttpClient*/
-  ) {
+  constructor /*private httpClient: HttpClient*/() {
     // setTimeout(() => {
     //   this.ingredients = [
-    //     { nom:'Sel' }, 
-    //     { nom:'Poivre' }, 
-    //     { nom:'Tomates' }, 
+    //     { nom:'Sel' },
+    //     { nom:'Poivre' },
+    //     { nom:'Tomates' },
     //     { nom:'Sucre' }
     //   ];
     //   this.students = ['Patrick', 'Ugur'];
     // }, 5000)
     // connection à l'api
-    this.httpClient.get<Data[]>('http://localhost:5097/api/data', { 
-      // permet d'ajouter les paramètres de requète (?limit=50)
-      params: { limit: 50 } 
-    })
-    // apres avoir recupérer les données
-    .subscribe({ 
-        // ce que je vais faire en cas de success 
-        next: data => {
-          //console.log(data)
-          this.data = data
-        },
-        // ce que je vais faire en cas d'erreur
-        error: () => {}
-      });
   }
 
   // trackFn(i: number, ing: any) {
   //   return ing.nom;
   // }
+
+  onBtnRefresh() {
+    console.log("J'ai cliqué sur le bouton refresh!");
+    this.sensorsService.fetchSensorsData();
+  }
 }
