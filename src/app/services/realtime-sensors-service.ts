@@ -25,7 +25,16 @@ export class RealtimeSensorsService {
       .build();
 
     // connexion au serveur
-    await this.connection.start();
+    try {
+      await this.connection.start();
+    } catch (e) {
+      console.log('connexion websocket échouée');
+      console.warn(e);
+
+      setTimeout(() => {
+        this.startConnectionAsync();
+      }, 3000);
+    }
 
     if (this.connection.connectionId) {
       // Nous somme connecté!
@@ -34,6 +43,17 @@ export class RealtimeSensorsService {
       this.connection.on('ReceiveSensorData', (receivedData) => {
         console.log(receivedData);
         this.incoming.set(receivedData);
+      });
+
+      this.connection.onclose(async () => {
+        console.log('connexion perdue :(');
+
+        // rappeler startConnectionAsync
+        await this.connection?.stop();
+
+        setTimeout(() => {
+          this.startConnectionAsync();
+        }, 3000);
       });
     }
   }
