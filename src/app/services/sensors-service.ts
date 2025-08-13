@@ -1,6 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Data } from '../../@types/data';
 import { HttpClient } from '@angular/common/http';
+import { RealtimeSensorsService } from './realtime-sensors-service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ export class SensorsService {
   data = signal<Data[] | null>(null);
 
   private httpClient = inject(HttpClient);
+  private realtimeSensor = inject(RealtimeSensorsService);
 
   constructor() {
     this.fetchSensorsData();
