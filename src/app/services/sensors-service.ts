@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { effect, inject, Injectable, signal } from '@angular/core';
 import { Data } from '../../@types/data';
 import { HttpClient } from '@angular/common/http';
 import { RealtimeSensorsService } from './realtime-sensors-service';
@@ -14,6 +14,27 @@ export class SensorsService {
 
   constructor() {
     this.fetchSensorsData();
+
+    // s'abonner au changement d'une valeur des signaux
+    effect(() => {
+      const newItem = this.realtimeSensor.incoming();
+
+      if (newItem) {
+        // ajouter newItem dans data
+        this.data.update((previous) => {
+          const list = previous ?? [];
+          // const liste1 = ["a", "b", "c"]
+          // const liste2 = [list1, "d"]
+          // log => [["a", "b", "c"], "d"] ❌
+
+          // const liste2 = [...list1, "d"] usage de "..." pour sortir tout les éléments de liste1
+          // log => ["a", "b", "c", "d"] ♥️
+
+          // "..." = JS spread operator
+          return [newItem, ...list];
+        });
+      }
+    });
   }
 
   fetchSensorsData() {

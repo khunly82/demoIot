@@ -21,7 +21,7 @@ export class Home {
 
   private sensorsService = inject(SensorsService);
 
-  data = this.sensorsService.data;
+  sensorsData = this.sensorsService.data;
 
   constructor /*private httpClient: HttpClient*/() {
     // setTimeout(() => {

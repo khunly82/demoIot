@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { Data } from '../../@types/data';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,9 @@ export class RealtimeSensorsService {
 
   // Etat de la connexion
   isConnected = signal(false);
+
+  // Dernière donnée reçue
+  incoming = signal<Data | null>(null);
 
   constructor() {
     this.startConnectionAsync();
@@ -27,8 +31,9 @@ export class RealtimeSensorsService {
       // Nous somme connecté!
       console.log('SignalR connectionId: ' + this.connection.connectionId);
 
-      this.connection.on('ReceiveSensorData', (data) => {
-        console.log(data);
+      this.connection.on('ReceiveSensorData', (receivedData) => {
+        console.log(receivedData);
+        this.incoming.set(receivedData);
       });
     }
   }
